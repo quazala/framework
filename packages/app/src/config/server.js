@@ -1,9 +1,9 @@
-import z from "zod";
+import z from 'zod';
 export const corsDefaultConfig = {
-  AllowOrigin: ["*"],
-  AllowMethods: ["*"],
-  AllowHeaders: ["*"],
-  ExposeHeaders: ["*"],
+  AllowOrigin: ['*'],
+  AllowMethods: ['*'],
+  AllowHeaders: ['*'],
+  ExposeHeaders: ['*'],
   AllowCredentials: true,
   MaxAge: 0,
 };
@@ -14,9 +14,7 @@ const corsObjectSchema = z.object({
     .default(corsDefaultConfig.AllowOrigin)
     .transform((arr) => Array.from(new Set(arr))),
   AllowMethods: z
-    .array(
-      z.enum(["GET", "HEAD", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "*"])
-    )
+    .array(z.enum(['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', '*']))
     .default(corsDefaultConfig.AllowMethods)
     .transform((arr) => Array.from(new Set(arr))),
   AllowHeaders: z
@@ -33,22 +31,19 @@ const corsObjectSchema = z.object({
 
 export const serverConfigSchema = z
   .object({
-    apiType: z.enum(["rest", "events", "rpc"]).optional().default("rest"),
-    proto: z.enum(["http", "ws", "https"]).optional().default("http"),
+    apiType: z.enum(['rest', 'events', 'rpc']).optional().default('rest'),
+    proto: z.enum(['http', 'ws', 'https']).optional().default('http'),
     transport: z
-      .array(z.enum(["http", "ws"]))
+      .array(z.enum(['http', 'ws']))
       .optional()
-      .default(["http"])
+      .default(['http'])
       .refine((arr) => arr.length > 0, {
-        message: "At least one transport method must be specified",
+        message: 'At least one transport method must be specified',
       })
       .transform((arr) => Array.from(new Set(arr))),
     port: z.coerce.number().int().min(1).max(65535).optional().default(8888),
-    host: z.string().min(4).optional().default("localhost"),
-    authStrategy: z
-      .enum(["none", "session", "bearer"])
-      .optional()
-      .default("none"),
+    host: z.string().min(4).optional().default('localhost'),
+    authStrategy: z.enum(['none', 'session', 'bearer']).optional().default('none'),
     corsOptions: z
       .array(corsObjectSchema)
       .default([corsDefaultConfig])
@@ -61,14 +56,13 @@ export const serverConfigSchema = z
   })
   .refine(
     (data) => {
-      if (data.authStrategy !== "none" && data.proto !== "http") {
+      if (data.authStrategy !== 'none' && data.proto !== 'http') {
         return false;
       }
       return true;
     },
     {
-      message:
-        "Authentication strategies other than 'none' require the 'http' protocol",
-      path: ["authStrategy"],
-    }
+      message: "Authentication strategies other than 'none' require the 'http' protocol",
+      path: ['authStrategy'],
+    },
   );

@@ -1,6 +1,6 @@
-import { Router } from "@quazala/router";
-import { Server } from "@quazala/server";
-import { FileStructureReader } from "@quazala/file-structure-reader";
+import { Router } from '@quazala/router';
+import { Server } from '@quazala/server';
+import { FileStructureReader } from '@quazala/file-structure-reader';
 
 export class App {
   constructor(options) {
@@ -11,23 +11,23 @@ export class App {
   }
 
   #readAndValidateConfig() {
-    this.configFS = new FileStructureReader("./config");
+    this.configFS = new FileStructureReader('./config');
   }
 
   #registerAuth() {
-    this.authFS = new FileStructureReader("./auth");
+    this.authFS = new FileStructureReader('./auth');
   }
 
   #registerHandlers(mode) {
-    this.handlerFS = new FileStructureReader("./handlers");
+    this.handlerFS = new FileStructureReader('./handlers');
   }
 
   #registerDatabases() {
-    this.databasesFS = new FileStructureReader("./databases");
+    this.databasesFS = new FileStructureReader('./databases');
   }
 
   #registerWorkers() {
-    this.workersFS = new FileStructureReader("./workers");
+    this.workersFS = new FileStructureReader('./workers');
   }
 
   #registerBuses() {}

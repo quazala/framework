@@ -1,5 +1,5 @@
-import z from "zod";
-import { serverConfigSchema } from "./server";
+import z from 'zod';
+import { serverConfigSchema } from './server';
 
 export const configSchema = z.object({
   server: serverConfigSchema,
