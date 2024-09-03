@@ -15,8 +15,5 @@ export default defineConfig({
     target: 'node16',
     minify: false,
   },
-  test: {
-    globals: true,
-    environment: 'node',
-  },
+  test: { include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'], globals: true, environment: 'node' },
 });

@@ -21,6 +21,7 @@ export default defineConfig({
     minify: false,
   },
   test: {
+    include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     globals: true,
     environment: 'node',
     poolOptions: {
