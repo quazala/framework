@@ -8,6 +8,7 @@
     "test": "pnpm -r test",
     "lint": "biome check .",
     "format": "biome format --write .",
+    "check": "pnpm biome check --write ./",
     "version-packages": "changeset version",
     "publish-packages": "pnpm build && changeset publish"
   },

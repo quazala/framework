@@ -27,7 +27,7 @@ describe('reader', () => {
   });
 
   test('handles values with equal signs', () => {
-    const input = `KEY=value=with=equals`;
+    const input = 'KEY=value=with=equals';
     expect(reader(input)).toEqual({
       KEY: 'value=with=equals',
     });
@@ -61,10 +61,11 @@ describe('reader', () => {
 
   test('uses process.env for undefined variables', () => {
     process.env.TEST_VAR = 'test_value';
-    const input = `EXPANDED_VAR=\${TEST_VAR}`;
+    const input = 'EXPANDED_VAR=${TEST_VAR}';
     expect(reader(input)).toEqual({
       EXPANDED_VAR: 'test_value',
     });
+    // biome-ignore lint/performance/noDelete: <explanation>
     delete process.env.TEST_VAR; // Clean up
   });
 
