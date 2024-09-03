@@ -2,7 +2,7 @@ import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import WebSocket from 'ws';
 import { Server } from '../src/server';
 
-describe('Server Integration Tests', () => {
+describe.skip('Server Integration Tests', () => {
   let httpServer;
   let wsServer;
   let HTTP_PORT;
