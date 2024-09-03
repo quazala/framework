@@ -15,7 +15,6 @@ export const connect = async (ctx) => {
     client.on('reconnecting', () => logger.info('Redis Client Reconnecting'));
     client.on('end', () => logger.info('Redis Client Connection Ended'));
 
-
     await client.connect();
 
     logger.info('Successfully connected to Redis');
